@@ -13,11 +13,15 @@ An unofficial PostNL CLI to easily create shipping labels.
 
 ## Setup
 
-After downloading and adding to your path you can start the cli by running the following command:
+After cloning the repo, you can install the cli by running:
 
 ```sh
-postnl
+chmod +x install_mac.sh
+
+./install_mac.sh
 ```
+> [!NOTE]  
+> Currently i've only created a install_mac script. You can create your own for windows and linux based on it.
 
 On first startup (or when no config can be found) the cli will ask for your details. You will need to enter the following:
 
