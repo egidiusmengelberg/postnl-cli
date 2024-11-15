@@ -115,7 +115,7 @@ async function main() {
   const recieverFirstName: string = await ask("What is the reciever's first name? (if left empty, business name is required)");
   const recieverLastName: string = await ask("What is the reciever's last name? (if left empty, business name is required)");
   const recieverEmail: string = await ask("What is the reciever's email?");
-  const reference: string = await ask('What is the reference of the shipment?', defaultReference) ?? defaultReference;
+  const reference: string = await ask('What is the reference of the shipment?', defaultReference) || defaultReference;
   const recieverPostalCodeQuery: string = await ask("What is the reciever's postal code?");
   const recieverHouseNumberQuery: string = await ask("What is the reciever's house number?");
 
