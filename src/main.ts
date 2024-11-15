@@ -45,7 +45,7 @@ async function setup() {
         value: 'https://api.postnl.nl',
       },
     ],
-  )
+  );
 
   const customerCode: string = await ask('What is your PostNL customer code?');
   const customerNumber: string = await ask('What is your PostNL customer number?');

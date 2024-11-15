@@ -15,7 +15,8 @@ export async function createShipment(
     },
     body: JSON.stringify({
       Customer: {
-        CollectionLocation: '100548', /* https://developer.postnl.nl/support/api-general/what-value-should-i-use-for-collectionlocation-or-bls-code/ */
+        CollectionLocation:
+          '100548', /* https://developer.postnl.nl/support/api-general/what-value-should-i-use-for-collectionlocation-or-bls-code/ */
         CustomerCode: config.customerInfo.code,
         CustomerNumber: config.customerInfo.number,
         Email: config.sender.email,
