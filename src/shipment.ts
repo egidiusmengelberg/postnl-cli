@@ -1,3 +1,4 @@
+import consola from 'npm:consola';
 import { TConfig, TParty } from './types.ts';
 
 export async function createShipment(
@@ -16,6 +17,7 @@ export async function createShipment(
       Customer: {
         CustomerCode: config.customerInfo.code,
         CustomerNumber: config.customerInfo.number,
+        Email: config.sender.email,
         Address: {
           AddressType: '02',
           CompanyName: config.sender.company_name,
@@ -35,24 +37,26 @@ export async function createShipment(
       },
       Shipments: [
         {
-          Addresses: {
-            AddressType: '01',
-            CompanyName: reciever.company_name,
-            FirstName: reciever.first_name,
-            Name: reciever.last_name,
-            Street: reciever.address.street,
-            HouseNr: reciever.address.houseNumber,
-            HouseNrExt: reciever.address.houseNumberAddition,
-            ZipCode: reciever.address.postalCode,
-            City: reciever.address.city,
-            Countrycode: 'NL',
-          },
+          Addresses: [
+            {
+              AddressType: '01',
+              CompanyName: reciever.company_name,
+              FirstName: reciever.first_name,
+              Name: reciever.last_name,
+              Street: reciever.address.street,
+              HouseNr: reciever.address.houseNumber,
+              HouseNrExt: reciever.address.houseNumberAddition,
+              ZipCode: reciever.address.postalCode,
+              City: reciever.address.city,
+              Countrycode: 'NL',
+            },
+          ],
           Contacts: {
             ContactType: '01',
             Email: reciever.email,
           },
           Dimension: {
-            Weight: 1000,
+            Weight: 2000,
           },
           ProductCodeDelivery: '3085',
           Reference: reference,
@@ -65,6 +69,16 @@ export async function createShipment(
 
   const barcode = data.ResponseShipments[0].Barcode;
   const label = data.ResponseShipments[0].Labels[0].Content;
+  const errors = data.ResponseShipments[0].Errors;
+  const warnings = data.ResponseShipments[0].Warnings;
+
+  if (errors.length > 0) {
+    consola.error(errors);
+  }
+
+  if (warnings.length > 0) {
+    console.warn(warnings);
+  }
 
   return { barcode, label };
 }
